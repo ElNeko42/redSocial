@@ -77,7 +77,7 @@ const submit = () => {
 
             <div class="flex items-center justify-end mt-4">
                 <Link v-if="canResetPassword" :href="route('password.request')" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    Forgot your password?
+                    recordar contraseña
                 </Link>
 
                 <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
@@ -85,5 +85,21 @@ const submit = () => {
                 </PrimaryButton>
             </div>
         </form>
+        <template #register>
+            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+            <div class="flex justify-center">
+                <span class="mr-4 text-gray-600">
+                    No tienes cuenta?
+                </span>
+                <Link :href="route('register')" class="underline text-gray-600 hover:text-gray-900">
+                    Reguistrate
+                </Link>
+            </div>
+        </div>
+        </template>
+       
     </AuthenticationCard>
+        
+       
+   
 </template>
