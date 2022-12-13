@@ -10,6 +10,7 @@ import TextInput from '@/Components/TextInput.vue';
 
 const form = useForm({
     name: '',
+    nick_name:'',
     email: '',
     password: '',
     password_confirmation: '',
@@ -24,6 +25,7 @@ const submit = () => {
 </script>
 
 <template>
+
     <Head title="Register" />
 
     <AuthenticationCard>
@@ -34,53 +36,35 @@ const submit = () => {
         <form @submit.prevent="submit">
             <div>
                 <InputLabel for="name" value="Nombre" />
-                <TextInput
-                    id="name"
-                    v-model="form.name"
-                    type="text"
-                    class="mt-1 block w-full"
-                    required
-                    autofocus
-                    autocomplete="name"
-                />
+                <TextInput id="name" v-model="form.name" type="text" class="mt-1 block w-full" required autofocus
+                    autocomplete="name" />
                 <InputError class="mt-2" :message="form.errors.name" />
+            </div>
+
+            <div>
+                <InputLabel for="nick_name" value="Nick name" />
+                <TextInput id="namnick_namee" v-model="form.nick_name" type="text" class="mt-1 block w-full" required 
+                    />
+                <InputError class="mt-2" :message="form.errors.nick_name" />
             </div>
 
             <div class="mt-4">
                 <InputLabel for="email" value="Email" />
-                <TextInput
-                    id="email"
-                    v-model="form.email"
-                    type="email"
-                    class="mt-1 block w-full"
-                    required
-                />
+                <TextInput id="email" v-model="form.email" type="email" class="mt-1 block w-full" required />
                 <InputError class="mt-2" :message="form.errors.email" />
             </div>
 
             <div class="mt-4">
                 <InputLabel for="password" value="Contraseña" />
-                <TextInput
-                    id="password"
-                    v-model="form.password"
-                    type="password"
-                    class="mt-1 block w-full"
-                    required
-                    autocomplete="new-password"
-                />
+                <TextInput id="password" v-model="form.password" type="password" class="mt-1 block w-full" required
+                    autocomplete="new-password" />
                 <InputError class="mt-2" :message="form.errors.password" />
             </div>
 
             <div class="mt-4">
                 <InputLabel for="password_confirmation" value="Confirma contraseña" />
-                <TextInput
-                    id="password_confirmation"
-                    v-model="form.password_confirmation"
-                    type="password"
-                    class="mt-1 block w-full"
-                    required
-                    autocomplete="new-password"
-                />
+                <TextInput id="password_confirmation" v-model="form.password_confirmation" type="password"
+                    class="mt-1 block w-full" required autocomplete="new-password" />
                 <InputError class="mt-2" :message="form.errors.password_confirmation" />
             </div>
 
@@ -90,7 +74,10 @@ const submit = () => {
                         <Checkbox id="terms" v-model:checked="form.terms" name="terms" required />
 
                         <div class="ml-2">
-                            yo acepto los <a target="_blank" :href="route('terms.show')" class="underline text-sm text-gray-600 hover:text-gray-900">Terminos de Servicio</a> y <a target="_blank" :href="route('policy.show')" class="underline text-sm text-gray-600 hover:text-gray-900">Politicas de privacidad</a>
+                            yo acepto los <a target="_blank" :href="route('terms.show')"
+                                class="underline text-sm text-gray-600 hover:text-gray-900">Terminos de Servicio</a> y
+                            <a target="_blank" :href="route('policy.show')"
+                                class="underline text-sm text-gray-600 hover:text-gray-900">Politicas de privacidad</a>
                         </div>
                     </div>
                     <InputError class="mt-2" :message="form.errors.terms" />
@@ -99,7 +86,7 @@ const submit = () => {
 
             <div class="flex items-center justify-end mt-4">
                 <Link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    ys estas reguisrado?
+                ys estas reguisrado?
                 </Link>
 
                 <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">

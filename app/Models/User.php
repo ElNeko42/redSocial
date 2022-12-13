@@ -26,7 +26,7 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name','nick_name', 'email', 'password','web_site','presentation','status',
     ];
 
     /**
@@ -59,10 +59,12 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function post(){
+    public function post()
+    {
         return $this->hasmany(Posts::class);
     }
-    public function followers(){
+    public function followers()
+    {
         return $this->hasmany(Followers::class);
     }
 }

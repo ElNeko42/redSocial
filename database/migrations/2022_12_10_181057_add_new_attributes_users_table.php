@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('web_site')->nullable();
             $table->text('presentation')->nullable();
             $table->boolean('stutus')->default(0);
-            $table->string('nick name')->unique();
+            $table->string('nick_name')->unique();
         });
     }
 
@@ -32,7 +32,7 @@ return new class extends Migration
             $table->dropColumn('web_site');
             $table->dropColumn('presentation');
             $table->dropColumn('stutus')->default(0);
-            $table->dropColumn('nick name');
+            $table->dropColumn('nick_name');
         });
     }
 };
