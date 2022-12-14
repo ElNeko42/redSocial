@@ -14,6 +14,8 @@ const props = defineProps({
         type: Array,
         default: () => ['py-1', 'bg-white'],
     },
+    overflow:'',
+    maxheight:'',
 });
 
 let open = ref(false);
@@ -30,6 +32,7 @@ onUnmounted(() => document.removeEventListener('keydown', closeOnEscape));
 const widthClass = computed(() => {
     return {
         '48': 'w-48',
+        '100': 'w-full',
     }[props.width.toString()];
 });
 
@@ -66,8 +69,9 @@ const alignmentClasses = computed(() => {
             <div
                 v-show="open"
                 class="absolute z-50 mt-2 rounded-md shadow-lg"
-                :class="[widthClass, alignmentClasses]"
+                :class="[widthClass, alignmentClasses,overflow]"
                 style="display: none;"
+                :style="'maxheight:'+maxheight+'px;'"
                 @click="open = false"
             >
                 <div class="rounded-md ring-1 ring-black ring-opacity-5" :class="contentClasses">
