@@ -51,7 +51,7 @@ const alignmentClasses = computed(() => {
 
 <template>
     <div class="relative">
-        <div @click="open = ! open">
+        <div @click="open = ! open" @keyup="open = ! open">
             <slot name="trigger" />
         </div>
 

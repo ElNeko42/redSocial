@@ -9,17 +9,34 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import AuthenticationCardLogo from '@/Components/AuthenticationCardLogo.vue';
+import axios from 'axios';
 defineProps({
     title: String,
 });
 
 const showingNavigationDropdown = ref(false);
+var users = ref([""]);
+var search = "";
 
 
 
 const logout = () => {
     Inertia.post(route('logout'));
 };
+//funcion buscador
+async function userSearch() {
+    //si no tiene nada limpia
+    if (search == "") {
+        users = [];
+    }
+    else {
+        await axios.get('/search/' + search).then(response => {
+           
+            users = response.data
+        })
+    }
+
+}
 </script>
 
 <template>
@@ -42,11 +59,12 @@ const logout = () => {
                                 </Link>
                             </div>
                         </div>
+                        <!--buscador-->
                         <div class="ml-3 relative">
                             <Dropdown align="center" width="100" overflow="overflow-y-auto" maxheight="300">
                                 <template #trigger>
                                     <div class="pt-2 relative mx-auto text-gray-600">
-                                        <input
+                                        <input v-model="search" @keyup="userSearch"
                                             class="border-2 border-gray-300 bg-white w-100 h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
                                             type="search" placeholder="Buscar amigos...">
                                         <span class="absolute right-0 top-0 mt-5 mr-4">
@@ -63,12 +81,14 @@ const logout = () => {
                                     </div>
                                 </template>
 
-                                <template #content>
-                                    <a href="" class="block flex items-center py-2 px-3 hover:bg-gray-100">
-                                        <img src="" alt="Luis"/>
+                                <template #content >
+                                    <a v-for="(user, index) in users" :key="index" href=""
+                                        class="block flex items-center py-2 px-3 hover:bg-gray-100">
+                                        <img class="rounded-full w-9 h-9 object-cover" :src="user.profile_photo_url" :alt="user.name" />
                                         <div class="ml-2">
-                                            <span class="block font-bold text-gray-400 text-sm">luis12</span>
-                                            <span class="text-sm font-light text-gray-400">luis eduardo</span>
+                                            <span class="block font-bold text-gray-400 text-sm">{{ user.nick_name
+                                            }}</span>
+                                            <span class="text-sm font-light text-gray-400">{{ user.name }}</span>
                                         </div>
                                     </a>
                                 </template>
